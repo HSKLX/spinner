@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,21 +19,23 @@ public class Spinner : MonoBehaviour
 
     //public float maxFo;//最大旋转力
 
-    public void AddFo(float fo)
+
+    public void AddFo(Vector3 fr)
     {
-        Debug.Log("fo" + fo);
+        Debug.Log("fr" + fr);
 
         //if (fo>maxFo)
         //{
         //    fo = maxFo;
         //}
 
-        fo *= foK;
+        fr *= (foK*0.02f);
 
         //限制最大速度
-        if (Mathf.Abs(rig.angularVelocity + fo)>maxSpeed)
+        rig.AddTorque(fr.z,ForceMode2D.Impulse);
+        if (Mathf.Abs(rig.angularVelocity) > maxSpeed)
         {
-            if (rig.angularVelocity>0)
+            if (rig.angularVelocity > 0)
             {
                 rig.angularVelocity = maxSpeed;
 
@@ -45,15 +47,47 @@ public class Spinner : MonoBehaviour
             }
 
         }
-        else
-        {
-            rig.angularVelocity += fo;
-
-        }
 
         Debug.Log("rig.angularVelocity" + rig.angularVelocity);
 
     }
+
+
+    //public void AddFo(float fo)
+    //{
+    //    Debug.Log("fo" + fo);
+
+    //    //if (fo>maxFo)
+    //    //{
+    //    //    fo = maxFo;
+    //    //}
+
+    //    fo *= foK;
+
+    //    //限制最大速度
+    //    if (Mathf.Abs(rig.angularVelocity + fo)>maxSpeed)
+    //    {
+    //        if (rig.angularVelocity>0)
+    //        {
+    //            rig.angularVelocity = maxSpeed;
+
+    //        }
+    //        else
+    //        {
+    //            rig.angularVelocity = -maxSpeed;
+
+    //        }
+
+    //    }
+    //    else
+    //    {
+    //        rig.angularVelocity += fo;
+
+    //    }
+
+    //    Debug.Log("rig.angularVelocity" + rig.angularVelocity);
+
+    //}
 
 
 
